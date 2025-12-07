@@ -1,11 +1,13 @@
 import React from 'react'
 import Navbar from '../../../../Components/Navbar/Navbar/Navbar'
 import Layout from '../../../../Components/Navbar/layout/Layout'    
-
+import { Link } from 'react-router-dom'
 
 const Card = () => {
+
   return (
-    <div className="max-w-sm rounded overflow-hidden shadow-lg">
+<Link to="/blog/id">   
+ <div className="max-w-sm rounded overflow-hidden shadow-lg">
   <img className="w-full" src="https://images.pexels.com/photos/462023/pexels-photo-462023.jpeg?cs=srgb&dl=pexels-pixabay-462023.jpg&fm=jpg" alt="Sunset in the mountains"/>
   <div className="px-6 py-4">
     <div className="font-bold text-xl mb-2">The Coldest Sunset</div>
@@ -18,7 +20,7 @@ const Card = () => {
     <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#travel</span>
     <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#winter</span>
   </div>
-</div>
+</div></Link>
   )
 }
 
