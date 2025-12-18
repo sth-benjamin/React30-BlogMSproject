@@ -1,6 +1,8 @@
 import React from 'react'
 import Layout from '../../Components/Navbar/layout/Layout'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
+import { baseUrl } from '../../config'
 
 const SingleBlog = () => {
   return (

@@ -1,23 +1,26 @@
 import React from 'react'
-import Form from './components/Form.jsx'
+import Form from './components/Form'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import { baseUrl } from '../../config'
 
-const Register = () => {
+const Register =  () => {
+  
   const navigate = useNavigate()
-  const handleRegister = async(data)=>{
-  try {const response = await axios.post("https://react30.onrender.com/api/user/register",data)
-  if(response.status === 201){
+  const handleRegister = async (data)=>{
+   try {
+    const response = await axios.post(`${baseUrl}/register`,data)
+   if(response.status === 201){
     navigate('/login')
    }else{
     alert("Registration failed")
    }
-  } catch (error) {
-    alert(error?.response?.data?.message || "An error occurred")
+   } catch (error) {
+    alert(error?.response?.data?.message)
+   }
   }
-}
   return (
-   <Form type='Register'onSubmit={handleRegister} />
+    <Form type='Register' onSubmit={handleRegister} />
   )
 }
 

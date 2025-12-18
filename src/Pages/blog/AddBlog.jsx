@@ -1,13 +1,23 @@
 import React from 'react'
-import Navbar from '../../Components/Navbar/Navbar/Navbar'
 import Layout from '../../Components/Navbar/layout/Layout'
-import Form from './components/Card/form/form'
+import axios from 'axios'
+import { baseUrl } from '../../config'
+import Form from './components/Card/form/Form'
 
 const AddBlog = () => {
+  const handleCreateBlog = async (data)=>{
+  const response = await axios.post(`${baseUrl}blog`,data,{
+    headers : {
+      "Content-Type" : "multipart/form-data"  
+  }
+  })
+
+  }
+  
   return (
-    <Layout>
-      <Form type='Create'/>
-    </Layout>
+  <Layout>
+	<Form type='Create' onSubmit={handleCreateBlog} />
+  </Layout>
   )
 }
 

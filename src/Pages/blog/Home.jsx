@@ -2,6 +2,8 @@ import React from 'react'
 import Navbar from '../../Components/Navbar/Navbar/Navbar'
 import Layout from '../../Components/Navbar/layout/Layout'
 import Card from './components/Card/Card'
+import axios from 'axios' 
+import { baseUrl } from '../../config'
 
 const Home = () => {
   return (

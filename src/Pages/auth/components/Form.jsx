@@ -1,116 +1,73 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState } from "react"
+import { Link } from "react-router-dom"
 
-// 1. FIX: Added 'onSubmit' to the destructured props
-const Form = ({type, onSubmit}) => { 
-    const [data, setData] = useState({
-        email: '',
-        username: '', 
-        password: ''    
+const Form = ({type,onSubmit}) => {
+    const [data,setData] = useState({
+        email : '',
+        username : '',
+        password : ''
     })
-    
-    const handleChange =(e)=>{
-      const{name,value}= e.target
-      
-      // OPTIONAL: Using the data state to control input values (recommended for React forms)
-      setData({...data,[name]:value}) 
+    const handleChange = (e)=>{
+        const {name,value} = e.target 
+        setData({
+            ...data,
+            [name] : value
+        })
     }
-    
     const handleSubmit = (e)=>{
-      e.preventDefault();
-      // 2. FIX: 'onSubmit' is now defined and called with the form data
-      onSubmit(data) 
+        e.preventDefault()
+        onSubmit(data)
     }
-
   return (
-    // Outer form correctly uses the handleSubmit handler
-    <form onSubmit={handleSubmit}>
-      <div class="lg:min-h-screen flex fle-col items-center justify-center p-6">
-        <div class="grid lg:grid-cols-2 items-center gap-10 max-w-6xl max-lg:max-w-lg w-full">
-          <div>
-            <h1 class="lg:text-5xl text-4xl font-bold text-slate-900 !leading-tight"> 
-              {type === 'Login' ? 'Login here to continue': 'Register your account now'}
-            </h1>
-            <p class="text-[15px] mt-6 text-slate-600 leading-relaxed">Immerse yourself in a hassle-free login journey with our intuitively designed login form. Effortlessly access your account.</p>
-          </div>
-
-          {/* 3. FIX: Replaced the redundant inner <form> tag with a <div> */}
-          <div class="max-w-md lg:ml-auto w-full"> 
-            <h2 class="text-slate-900 text-3xl font-semibold mb-8">
-              Sign in
-            </h2>
-
-            <div class="space-y-6">
-              <div>
-                <label class='text-sm text-slate-900 font-medium mb-2 block'>Email</label>
-                {/* Added value prop for controlled component */}
-                <input name="email" type="email" id="email" required class="bg-slate-100 w-full text-sm text-slate-900 px-4 py-3 rounded-md outline-0 border border-gray-200 focus:border-blue-600 focus:bg-transparent" placeholder="Enter Email" onChange={handleChange} value={data.email} />
-              </div>
-              {
-                type === 'Register' && (
-                  <div>
-                    <label class='text-sm text-slate-900 font-medium mb-2 block'>Username</label>
-                    {/* Updated type to 'text' and added value prop */}
-                    <input name="username" type="text" required class="bg-slate-100 w-full text-sm text-slate-900 px-4 py-3 rounded-md outline-0 border border-gray-200 focus:border-blue-600 focus:bg-transparent" placeholder="Enter Username" onChange={handleChange} value={data.username}/>
-                  </div>
-                )
-              }
-              <div>
-                <label class='text-sm text-slate-900 font-medium mb-2 block'>Password</label>
-                {/* Added value prop */}
-                <input name="password" type="password" required class="bg-slate-100 w-full text-sm text-slate-900 px-4 py-3 rounded-md outline-0 border border-gray-200 focus:border-blue-600 focus:bg-transparent" placeholder="Enter Password" onChange={handleChange} value={data.password} />
-              </div>
-
-              <div class="flex flex-wrap items-center justify-between gap-4">
-                <div class="flex items-center">
-                  <input id="remember-me" name="remember-me" type="checkbox" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-slate-300 rounded" />
-                  <label htmlFor="remember-me" class="ml-3 block text-sm text-slate-900">
-                    Remember me
-                  </label>
-                </div>
-                <div class="text-sm">
-                  <a href="jajvascript:void(0);" class="text-blue-600 hover:text-blue-500 font-medium">
-                    Forgot your password?
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            <div class="!mt-12">
-              {/* 4. FIX: Changed type to "submit" to trigger the form's onSubmit handler */}
-              <button type="submit" class="w-full shadow-xl py-2.5 px-4 text-[15px] font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none cursor-pointer">
-                Submit
-              </button>
-            </div>
-
-            <div class="my-6 flex items-center gap-4">
-              <hr class="w-full border-slate-300" />
-              <p class="text-sm text-slate-900 text-center">or</p>
-              <hr class="w-full border-slate-300" />
-            </div>
-
-            <div class="space-x-6 flex justify-center">
-              <button type="button" class="border-0 outline-0 cursor-pointer">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 512 512">...</svg>
-              </button>
-              <button type="button" class="border-0 outline-0 cursor-pointer">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 512 512">...</svg>
-              </button>
-              <button type="button" class="border-0 outline-0 cursor-pointer">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 22.773 22.773">...</svg>
-              </button>
-            </div>
-          </div>
+    <div className="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
+    <div className="relative py-3 sm:max-w-xl sm:mx-auto">
+        <div
+            className="absolute inset-0 bg-gradient-to-r from-blue-300 to-blue-600 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl">
         </div>
-      </div>
-      {
-        type === 'Register' ?(
-        <Link to='/login' style={{color:'blue'}}>Go to login</Link>
-        ) :(
-          <Link to='/Register'>Go to Register</Link>
-        )
-      }
-    </form>
+        <div className="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20">
+            <div className="max-w-md mx-auto">
+                <div>
+                    <h1 className="text-2xl font-semibold">
+                        { type === 'Login' ? 'Login here to continue...' : 'Register here to continue...' }
+                    </h1>
+                </div>
+         <form onSubmit={handleSubmit}>
+         <div className="divide-y divide-gray-200">
+                    <div className="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
+                        <div className="relative">
+                            <input autoComplete="off" id="email" name="email" type="text" className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600" placeholder="Email address" onChange={handleChange} required />
+                            <label htmlFor="email" className="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm" >Email Address</label>
+                        </div>
+                   {
+                    type === 'Register' && (
+                        <div className="relative">
+                        <input autoComplete="off" id="username" name="username" type="text" className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600" placeholder="username address" onChange={handleChange} required />
+                        <label htmlFor="username" className="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">Username</label>
+                    </div>
+                    )
+                   }
+                        <div className="relative">
+                            <input autoComplete="off" id="password" name="password" type="password" className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600" placeholder="Password" onChange={handleChange} required />
+                            <label htmlFor="password" className="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">Password</label>
+                        </div>
+                        <div className="relative">
+                            <button className="bg-blue-500 text-white rounded-md px-2 py-1">Submit</button>
+                        </div>
+                    </div>
+                </div>
+                {
+                    type === 'Register' ? (
+                        <Link to='/login' style={{color:'blue'}} >Go to login</Link>
+                    ) : (
+                        <Link to='/register'style={{color:'blue'}} >Go to register</Link>
+
+                    )
+                }
+         </form>
+            </div>
+        </div>
+    </div>
+</div>
   )
 }
 
