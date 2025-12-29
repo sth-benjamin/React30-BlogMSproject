@@ -3,22 +3,19 @@ import Navbar from '../../../../Components/Navbar/Navbar/Navbar'
 import Layout from '../../../../Components/Navbar/layout/Layout'    
 import { Link } from 'react-router-dom'
 
-const Card = () => {
+const Card = (blog) => {
 
   return (
-<Link to="/blog/id">   
+<Link to={`/blog/${blog._id}`}>   
  <div className="max-w-sm rounded overflow-hidden shadow-lg">
-  <img className="w-full" src="https://images.pexels.com/photos/462023/pexels-photo-462023.jpeg?cs=srgb&dl=pexels-pixabay-462023.jpg&fm=jpg" alt="Sunset in the mountains"/>
+  <img className="w-full" src={blog.imageUrl} alt="Sunset in the mountains"/>
   <div className="px-6 py-4">
-    <div className="font-bold text-xl mb-2">The Coldest Sunset</div>
+    <div className="font-bold text-xl mb-2">{blog.title}</div>
     <p className="text-gray-700 text-base">
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.
-    </p>
+     {blog.description} </p>
   </div>
   <div className="px-6 pt-4 pb-2">
-    <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#photography</span>
-    <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#travel</span>
-    <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#winter</span>
+    <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#{blog.category}</span>
   </div>
 </div></Link>
   )
